@@ -1,0 +1,31 @@
+web:
+  build: ./images/nginx/
+  ports:
+    - "8080:80"
+  volumes:
+    - ./www:/var/www
+    - ./conf/vhost.conf:/etc/nginx/sites-enabled/vhost.conf
+  links:
+    - php
+php:
+  build: ./images/php/
+  dns:
+    - 8.8.8.8
+    - 8.8.4.4
+  volumes:
+    - ./www:/var/www
+    - ./conf/fpm.conf:/etc/php5/fpm/php-fpm.conf
+  ports:
+    - "9100:9100"
+  links:
+    - db
+db:
+  image: sameersbn/mysql
+  volumes:
+    - /var/lib/mysql
+  environment:
+    - DB_NAME=thumbsDb
+    - DB_USER=thumbsUser
+    - DB_PASS=thumbsPass
+  ports:
+    - "3306:3306"
