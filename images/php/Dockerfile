@@ -5,9 +5,9 @@ CMD ["/sbin/my_init"]
 
 RUN usermod -u 1000 www-data
 
-RUN apt-get update && apt-get install -y zip
+#RUN apt-get update && apt-get install -y zip
 
-RUN apt-get install -y --force-yes php5-imagick
+#RUN apt-get install -y --force-yes php5-imagick
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=bin --filename=composer
 

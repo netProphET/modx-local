@@ -8,15 +8,16 @@ web:
   links:
     - php
 php:
-  build: ./images/php/
+  build: ./images/php
   dns:
     - 8.8.8.8
     - 8.8.4.4
   volumes:
     - ./www:/var/www
+    - ./teleport-cloud:/usr/local/src/teleport-cloud
     - ./conf/fpm.conf:/etc/php5/fpm/php-fpm.conf
-  ports:
-    - "9100:9100"
+  expose:
+    - 9100
   links:
     - db
 db:
@@ -27,5 +28,5 @@ db:
     - DB_NAME=thumbsDb
     - DB_USER=thumbsUser
     - DB_PASS=thumbsPass
-  ports:
-    - "3306:3306"
+  expose:
+    - 3306
